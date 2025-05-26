@@ -1,41 +1,67 @@
-# inabank
+# Inabank
 
-This template should help get you started developing with Vue 3 in Vite.
+Una demo simple de autenticación con Vue.js + Firebase para registro e inicio de sesión de usuarios.
 
-## Recommended IDE Setup
+## Características
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Registro de usuarios (sign up) con email y contraseña
+- Inicio de sesión (login) con email y contraseña
+- Validación de formularios y manejo de errores
+- Integración con Firebase Authentication
+- Interfaz moderna con Tailwind CSS
 
-## Customize configuration
+## Estructura del proyecto
 
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
+```
+src/
+  components/         # Componentes Vue
+  firebase/           # Configuración de Firebase y helpers de autenticación
+  router/             # Configuración de Vue Router
+  stores/             # Pinia/Vuex stores (si se usan)
+  views/              # Vistas principales (Login, Signup, Home, About)
+  App.vue             # Componente principal
+  main.js             # Punto de entrada de la app
 ```
 
-### Compile and Hot-Reload for Development
+## Configuración
 
-```sh
-npm run dev
-```
+1. **Clona el repositorio:**
+   ```sh
+   git clone <tu-url-del-repo>
+   cd inabank
+   ```
+2. **Instala las dependencias:**
+   ```sh
+   npm install
+   ```
+3. **Configura las variables de entorno:**
+   - Crea un archivo `.env` en la raíz del proyecto usando `.env.example` como referencia:
+   ```
+   VITE_FIREBASE_API_KEY=tu_api_key
+   VITE_FIREBASE_AUTH_DOMAIN=tu_auth_domain
+   VITE_FIREBASE_PROJECT_ID=tu_project_id
+   VITE_FIREBASE_STORAGE_BUCKET=tu_storage_bucket
+   VITE_FIREBASE_MESSAGING_SENDER_ID=tu_messaging_sender_id
+   VITE_FIREBASE_APP_ID=tu_app_id
+   ```
+   - Reemplaza los valores con los de tu proyecto de Firebase.
+   - No compartas tu archivo `.env` ni lo subas a git.
+4. **Ejecuta la app:**
+   ```sh
+   npm run dev
+   ```
 
-### Compile and Minify for Production
+## Uso
 
-```sh
-npm run build
-```
+- Visita `/signup` para crear una nueva cuenta.
+- Visita `/login` para iniciar sesión con tus credenciales.
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+## Comandos útiles
 
-```sh
-npm run test:unit
-```
+- `npm run dev` — Inicia el servidor de desarrollo
+- `npm run build` — Compila para producción
+- `npm run test` — Ejecuta los tests (si están configurados)
 
-### Lint with [ESLint](https://eslint.org/)
+## Licencia
 
-```sh
-npm run lint
-```
+MIT
