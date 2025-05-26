@@ -2,6 +2,11 @@
 
 Una demo simple de autenticación con Vue.js + Firebase para registro e inicio de sesión de usuarios.
 
+## Integrantes
+
+- **Benjamin Soto**
+- **Vicente Ostornol**
+
 ## Características
 
 - Registro de usuarios (sign up) con email y contraseña
