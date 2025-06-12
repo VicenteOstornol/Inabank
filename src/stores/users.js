@@ -2,7 +2,7 @@ import { defineStore, acceptHMRUpdate } from 'pinia'
 import { auth, loginUser, registerUser } from '@/firebase/auth'
 import { db } from '@/firebase/config'
 import { onAuthStateChanged } from 'firebase/auth'
-import { doc, getDoc } from 'firebase/firestore'
+import { doc, getDoc, setDoc } from 'firebase/firestore'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -105,6 +105,38 @@ export const useUserStore = defineStore('user', {
       this.isLoggedIn = false
       this.loadingUser = false
       console.log('Usuario desconectado')
+    },
+    getBalance() {
+      if (this.user && this.user.movements) {
+        return this.user.movements.reduce((acc, movement) => acc + movement.amount, 0)
+      }
+      return 0
+    },
+    getMovements() {
+      if (this.user && this.user.movements) {
+        return this.user.movements.sort((a, b) => new Date(b.date) - new Date(a.date))
+      }
+      return []
+    },
+
+    async addMovement(amount) {
+      const date = new Date().toISOString()
+      if (this.user) {
+        if (!this.user.movements) {
+          this.user.movements = []
+        }
+        this.user.movements.push({ amount, date })
+        console.log('Movimiento agregado:', { amount, date })
+        await setDoc(
+          doc(db, 'users', this.user.uid),
+          { movements: this.user.movements },
+          { merge: true },
+        )
+
+        console.log('Nuevo balance:', this.getBalance())
+      } else {
+        console.error('No hay usuario conectado para agregar movimiento')
+      }
     },
   },
 })

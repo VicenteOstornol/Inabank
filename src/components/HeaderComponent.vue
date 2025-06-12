@@ -52,7 +52,6 @@ const navigation = computed(() =>
     { name: 'Inicio (pronto)', href: '#' },
     { name: 'Nosotros (pronto)', href: '#' },
     { name: 'Mi Saldo', href: 'my-balance', isProtected: true },
-    { name: 'Ingresar o Retirar Dinero', href: 'deposit-withdraw', isProtected: true },
   ].filter((item) => !item.isProtected || (item.isProtected && user.value)),
 )
 </script>

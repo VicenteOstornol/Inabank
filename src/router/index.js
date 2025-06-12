@@ -36,12 +36,6 @@ const router = createRouter({
       component: () => import('../views/MyBalanceView.vue'),
       meta: { requiresAuth: true },
     },
-    {
-      path: '/deposit-withdraw',
-      name: 'deposit-withdraw',
-      component: () => import('../views/DepositWithdrawView.vue'),
-      meta: { requiresAuth: true },
-    },
   ],
 })
 
