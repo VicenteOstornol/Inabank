@@ -41,8 +41,12 @@ const deposit = (amount) => {
 <template>
   <div class="flex flex-col items-center bg-white min-h-screen">
     <h2 class="text-2xl font-medium text-gray-900 mt-8 mb-4">Mi Saldo:</h2>
-    <div class="text-6xl font-bold text-indigo-600">
-      $ {{ Number(balance).toLocaleString('es-CL', { minimumFractionDigits: 0 }) }}
+    <div class="overflow-x-auto max-w-full">
+      <div
+        class="inline-block text-[clamp(2.5rem,7vw,4rem)] font-bold text-indigo-600 whitespace-nowrap"
+      >
+        $ {{ Number(balance).toLocaleString('es-CL', { minimumFractionDigits: 0 }) }}
+      </div>
     </div>
 
     <div class="flex space-x-4 mt-6">
