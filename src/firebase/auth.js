@@ -2,7 +2,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } f
 import { app, db } from './config'
 import { doc, setDoc } from 'firebase/firestore'
 
-const auth = getAuth(app)
+export const auth = getAuth(app)
 
 export const registerUser = async (email, password) => {
   try {
@@ -26,15 +26,6 @@ export const loginUser = async (email, password) => {
     return userCredential.user
   } catch (error) {
     console.error('Error logging in user:', error)
-    throw error
-  }
-}
-
-export const logoutUser = async () => {
-  try {
-    await auth.signOut()
-  } catch (error) {
-    console.error('Error logging out user:', error)
     throw error
   }
 }

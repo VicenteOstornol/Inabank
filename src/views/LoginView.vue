@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { loginUser } from '@/firebase/auth'
+import { useUserStore } from '@/stores/users'
 
+const userStore = useUserStore()
 const email = ref('')
 const password = ref('')
 const error = ref('')
@@ -17,7 +18,7 @@ const handleSubmit = async (e) => {
   }
   loading.value = true
   try {
-    await loginUser(email.value, password.value)
+    await userStore.login(email.value, password.value)
     alert('¡Inicio de sesión exitoso!')
   } catch (err) {
     if (err && err.code === 'auth/user-not-found') {
@@ -35,7 +36,7 @@ const handleSubmit = async (e) => {
 }
 </script>
 
-<template v-if="isLoginIn">
+<template>
   <div class="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
       <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
