@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { registerUser } from '@/firebase/auth'
+import { useUserStore } from '@/stores/users'
 
+import router from '@/router'
+const userStore = useUserStore()
 const email = ref('')
 const password = ref('')
 const confirmPassword = ref('')
@@ -28,11 +30,8 @@ const handleSubmit = async (e) => {
   }
   loading.value = true
   try {
-    await registerUser(email.value, password.value)
-    success.value = '¡Registro exitoso! Ahora puedes iniciar sesión.'
-    email.value = ''
-    password.value = ''
-    confirmPassword.value = ''
+    await userStore.register(email.value, password.value)
+    router.push('/my-balance')
   } catch (err) {
     if (err && err.code === 'auth/email-already-in-use') {
       error.value = 'El correo ya está registrado.'

@@ -35,13 +35,16 @@ export const useUserStore = defineStore('user', {
 
       try {
         const user = await registerUser(email, password)
-        console.log('Usuario registrado:', user.email)
         this.user = {
           uid: user.uid,
           email: user.email,
-          balance: 0,
+          movements: [],
         }
+        await setDoc(doc(db, 'users', user.uid), this.user)
+
+        console.log('Usuario registrado:', user)
         this.isLoggedIn = true
+        await this.fetchUser() // Automatically fetch and login the user
       } catch (error) {
         console.error('Error al registrar usuario:', error)
         throw error
