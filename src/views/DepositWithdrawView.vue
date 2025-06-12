@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/users'
-import router from '@/router'
 
 const userStore = useUserStore()
 const email = ref('')
@@ -20,7 +19,7 @@ const handleSubmit = async (e) => {
   loading.value = true
   try {
     await userStore.login(email.value, password.value)
-    router.push('/my-balance')
+    alert('¡Inicio de sesión exitoso!')
   } catch (err) {
     if (err && err.code === 'auth/user-not-found') {
       error.value = 'Usuario no encontrado.'
@@ -88,30 +87,7 @@ const handleSubmit = async (e) => {
             :disabled="loading"
             class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50"
           >
-            <span v-if="loading" class="flex items-center justify-center">
-              <svg
-                class="animate-spin h-5 w-5 mr-2 text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  class="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  stroke-width="4"
-                ></circle>
-                <path
-                  class="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                ></path>
-              </svg>
-              Ingresando...
-            </span>
-            <span v-else> Iniciar sesión </span>
+            {{ loading ? 'Ingresando...' : 'Iniciar sesión' }}
           </button>
         </div>
       </form>

@@ -43,12 +43,16 @@
 <script setup lang="ts">
 import { useUserStore } from '@/stores/users'
 import { storeToRefs } from 'pinia'
-
-const navigation = [
-  { name: 'Inicio (pronto)', href: '#' },
-  { name: 'Nosotros (pronto)', href: '#' },
-]
-
 const userStore = useUserStore()
 const { user } = storeToRefs(userStore)
+import { computed } from 'vue'
+
+const navigation = computed(() =>
+  [
+    { name: 'Inicio (pronto)', href: '#' },
+    { name: 'Nosotros (pronto)', href: '#' },
+    { name: 'Mi Saldo', href: 'my-balance', isProtected: true },
+    { name: 'Ingresar o Retirar Dinero', href: 'deposit-withdraw', isProtected: true },
+  ].filter((item) => !item.isProtected || (item.isProtected && user.value)),
+)
 </script>
