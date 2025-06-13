@@ -21,7 +21,7 @@ describe('Balance.vue', () => {
     useUserStore.mockReturnValue(mockStore)
   })
 
-  it('abre el modal de depósito al hacer clic en "Depositar"', async () => {
+  it('Open the deposit modal when clicking on "Deposit"', async () => {
     const wrapper = mount(Balance)
 
     const buttons = wrapper.findAll('button')
@@ -33,7 +33,7 @@ describe('Balance.vue', () => {
     expect(wrapper.text()).toContain('Depositar Monto')
   })
 
-  it('ejecuta un depósito válido', async () => {
+  it('executes a valid deposit', async () => {
     const wrapper = mount(Balance)
 
     const depositBtn = wrapper.findAll('button').find(btn => btn.text() === 'Depositar')
@@ -48,7 +48,7 @@ describe('Balance.vue', () => {
     expect(mockAddMovement).toHaveBeenCalledWith(500)
   })
 
-  it('no ejecuta transacción con monto inválido', async () => {
+  it("does not execute transaction with invalid amount", async () => {
     const wrapper = mount(Balance)
 
     const depositBtn = wrapper.findAll('button').find(btn => btn.text() === 'Depositar')
