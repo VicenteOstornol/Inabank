@@ -50,6 +50,8 @@ import { computed } from 'vue'
 const navigation = computed(() =>
   [
     { name: 'Inicio (pronto)', href: '#' },
+    // soy un comentario
+    // TODO: nada
     { name: 'Nosotros (pronto)', href: '#' },
     { name: 'Mi Saldo', href: 'my-balance', isProtected: true },
   ].filter((item) => !item.isProtected || (item.isProtected && user.value)),
